@@ -6,7 +6,8 @@ namespace IdentityDemo.Application.Users
 {
     public interface IIdentityUserService
     {
-        public Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password);
-       
+        Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password);
+        Task<UserResultDto> SignInAsync(string email, string password);
+        
     }
 }

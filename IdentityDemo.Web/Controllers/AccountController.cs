@@ -10,8 +10,10 @@ using IdentityDemo.Web.Views.Account;
 
 namespace IdentityDemo.Web.Controllers;
 
+[Authorize]
 public class AccountController(IUserService userService) : Controller
 {
+    
     [HttpGet("")]
     [HttpGet("members")]
     public IActionResult Members()
@@ -19,6 +21,7 @@ public class AccountController(IUserService userService) : Controller
         return View();
     }
 
+    [AllowAnonymous]
     [HttpGet("register")]
     public IActionResult Register()
     {
@@ -45,6 +48,7 @@ public class AccountController(IUserService userService) : Controller
         return RedirectToAction(nameof(Login));
     }
 
+    [AllowAnonymous]
     [HttpGet("login")]
     public IActionResult Login()
     {

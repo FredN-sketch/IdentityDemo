@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IdentityDemo.Application.Users;
 
 namespace IdentityDemo.Infrastructure.Services
 {
     public class IdentityUserService // Infrastructure-servicen
-(
-UserManager<ApplicationUser> userManager, // Hanterar användare
-SignInManager<ApplicationUser> signInManager, // Hanterar inlogging
-RoleManager<IdentityRole> roleManager // Hanterar roller
-) : IIdentityUserService
+    (
+        UserManager<ApplicationUser> userManager, // Hanterar användare
+        SignInManager<ApplicationUser> signInManager, // Hanterar inlogging
+        RoleManager<IdentityRole> roleManager // Hanterar roller
+    ) : IIdentityUserService
     {
         public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password)
         {
@@ -27,6 +28,15 @@ RoleManager<IdentityRole> roleManager // Hanterar roller
             }, password);
             return new UserResultDto(result.Errors.FirstOrDefault()?.Description);
         }
-        //..//
+
+        public async Task<UserResultDto> SignInAsync(string email, string password)
+        {
+            var result = await signInManager.PasswordSignInAsync(email, password, false, false);
+            return new UserResultDto(result.Succeeded ? null : "Invalid user credentials");
+        }
+
+        
+
+
     }
 }
