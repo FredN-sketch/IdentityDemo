@@ -27,7 +27,7 @@ public class AccountController(IUserService userService) : Controller
     {
         return View();
     }
-
+    [AllowAnonymous]
     [HttpPost("register")]
     public async Task<IActionResult> RegisterAsync(RegisterVM viewModel)
     {
@@ -54,7 +54,7 @@ public class AccountController(IUserService userService) : Controller
     {
         return View();
     }
-
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<IActionResult> LoginAsync(LoginVM viewModel)
     {
